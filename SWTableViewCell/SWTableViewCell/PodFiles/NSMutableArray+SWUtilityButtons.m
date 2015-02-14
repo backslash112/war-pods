@@ -45,7 +45,7 @@
     [button setImage:selectedIcon forState:UIControlStateHighlighted];
     [button setImage:selectedIcon forState:UIControlStateSelected];
     
-    button.imageEdgeInsets = UIEdgeInsetsMake(0.0, button.frame.size.width - (normalIcon.size.width - 60.0), 0.0, 0.0);
+    //button.imageEdgeInsets = UIEdgeInsetsMake(0.0, button.frame.size.width - (normalIcon.size.width - 60.0), 0.0, 0.0);
     
     [self addObject:button];
 }
