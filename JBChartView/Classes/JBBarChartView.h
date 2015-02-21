@@ -113,6 +113,10 @@
  */
 - (CGFloat)barPaddingForBarChartView:(JBBarChartView *)barChartView;
 
+- (CGFloat)barGroupPaddingForBarChartView:(JBBarChartView *)barChatView;
+
+- (int)itemsCountInOneGroup;
+
 @end
 
 @interface JBBarChartView : JBChartView

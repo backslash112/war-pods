@@ -31,6 +31,10 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
 @property (nonatomic, strong) NSArray *barViews;
 @property (nonatomic, strong) NSArray *cachedBarViewHeights;
 @property (nonatomic, assign) CGFloat barPadding;
+
+@property (nonatomic, assign) int itemsCountInOneGroup;
+@property (nonatomic, assign) CGFloat itemsGroupPadding;
+
 @property (nonatomic, assign) CGFloat cachedMaxHeight;
 @property (nonatomic, assign) CGFloat cachedMinHeight;
 @property (nonatomic, strong) JBChartVerticalSelectionView *verticalSelectionView;
@@ -61,10 +65,10 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
 
 + (void)initialize
 {
-	if (self == [JBBarChartView class])
-	{
-		kJBBarChartViewDefaultBarColor = [UIColor blackColor];
-	}
+    if (self == [JBBarChartView class])
+    {
+        kJBBarChartViewDefaultBarColor = [UIColor blackColor];
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -128,7 +132,7 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
         // Grab the count
         NSAssert([self.dataSource respondsToSelector:@selector(numberOfBarsInBarChartView:)], @"JBBarChartView // datasource must implement - (NSUInteger)numberOfBarsInBarChartView:(JBBarChartView *)barChartView");
         NSUInteger dataCount = [self.dataSource numberOfBarsInBarChartView:self];
-
+        
         // Build up the data collection
         NSAssert([self.delegate respondsToSelector:@selector(barChartView:heightForBarViewAtIndex:)], @"JBBarChartView // delegate must implement - (CGFloat)barChartView:(JBBarChartView *)barChartView heightForBarViewAtIndex:(NSUInteger)index");
         NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
@@ -139,7 +143,7 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
             [dataDictionary setObject:[NSNumber numberWithFloat:height] forKey:[NSNumber numberWithInt:(int)index]];
         }
         self.chartDataDictionary = [NSDictionary dictionaryWithDictionary:dataDictionary];
-	};
+    };
     
     /*
      * Determines the padding between bars as a function of # of bars
@@ -153,6 +157,25 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
         {
             NSUInteger totalBars = [[self.chartDataDictionary allKeys] count];
             self.barPadding = (1/(float)totalBars) * kJBBarChartViewBarBasePaddingMutliplier;
+        }
+    };
+    
+    dispatch_block_t createItemsGroupPadding = ^{
+        if ([self.delegate respondsToSelector:@selector(barGroupPaddingForBarChartView:)])
+        {
+            self.itemsGroupPadding = [self.delegate barGroupPaddingForBarChartView:self];
+        } else {
+            self.itemsGroupPadding = self.barPadding;
+        }
+        
+    };
+    
+    dispatch_block_t createItemsCountInOneGroup = ^{
+        if ([self.delegate respondsToSelector:@selector(itemsCountInOneGroup)])
+        {
+            self.itemsCountInOneGroup = [self.delegate itemsCountInOneGroup];
+        } else {
+            self.itemsCountInOneGroup = 1;
         }
     };
     
@@ -185,7 +208,7 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
             {
                 barView = [[UIView alloc] init];
                 UIColor *backgroundColor = nil;
-
+                
                 if ([self.delegate respondsToSelector:@selector(barChartView:colorForBarViewAtIndex:)])
                 {
                     backgroundColor = [self.delegate barChartView:self colorForBarViewAtIndex:index];
@@ -195,28 +218,32 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
                 {
                     backgroundColor = kJBBarChartViewDefaultBarColor;
                 }
-
+                
                 barView.backgroundColor = backgroundColor;
             }
             
             barView.tag = index;
-
+            
             CGFloat height = [self normalizedHeightForRawHeight:[self.chartDataDictionary objectForKey:key]];
             barView.frame = CGRectMake(xOffset, self.bounds.size.height - height - self.footerView.frame.size.height, [self barWidth], height);
             [mutableBarViews addObject:barView];
             [mutableCachedBarViewHeights addObject:[NSNumber numberWithFloat:height]];
-			
+            
             // Add new bar
             if (self.footerView)
-			{
-				[self insertSubview:barView belowSubview:self.footerView];
-			}
-			else
-			{
-				[self addSubview:barView];
-			}
+            {
+                [self insertSubview:barView belowSubview:self.footerView];
+            }
+            else
+            {
+                [self addSubview:barView];
+            }
+            //            NSUInteger barCount = [[self.chartDataDictionary allKeys] count];
             
-            xOffset += ([self barWidth] + self.barPadding);
+            CGFloat padding = index % self.itemsCountInOneGroup == 0 ? self.barPadding : self.itemsGroupPadding;
+            NSLog(@"%lu - %f", (unsigned long)index, padding);
+            //            CGFloat padding = self.barPadding;
+            xOffset += ([self barWidth] + padding);
             index++;
         }
         self.barViews = [NSArray arrayWithArray:mutableBarViews];
@@ -252,7 +279,7 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
                 verticalSelectionViewHeight += self.footerPadding;
             }
         }
-
+        
         self.verticalSelectionView = [[JBChartVerticalSelectionView alloc] initWithFrame:CGRectMake(0, 0, [self barWidth], verticalSelectionViewHeight)];
         self.verticalSelectionView.alpha = 0.0;
         self.verticalSelectionView.hidden = !self.showsVerticalSelection;
@@ -278,13 +305,15 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
     
     createDataDictionaries();
     createBarPadding();
+    createItemsGroupPadding();
+    createItemsCountInOneGroup();
     createBars();
     createSelectionView();
     
     // Position header and footer
     self.headerView.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.headerView.frame.size.height);
     self.footerView.frame = CGRectMake(self.bounds.origin.x, self.bounds.size.height - self.footerView.frame.size.height, self.bounds.size.width, self.footerView.frame.size.height);
-
+    
     // Refresh state
     [self setState:self.state animated:NO force:YES callback:nil];
 }
@@ -315,9 +344,20 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
     NSUInteger barCount = [[self.chartDataDictionary allKeys] count];
     if (barCount > 0)
     {
-        CGFloat totalPadding = (barCount - 1) * self.barPadding;
-        CGFloat availableWidth = self.bounds.size.width - totalPadding;
-        return availableWidth / barCount;
+        if (self.itemsCountInOneGroup > 1) {
+            int groupCount = (int)(barCount / self.itemsCountInOneGroup);
+            CGFloat widerTotalPadding = (groupCount - 1) * self.itemsGroupPadding;
+            CGFloat narrowerTotalPadding = (groupCount) * self.barPadding;
+            //        CGFloat totalPadding = (barCount - 1) * self.barPadding;
+            CGFloat totalPadding = widerTotalPadding + narrowerTotalPadding;
+            CGFloat availableWidth = self.bounds.size.width - totalPadding;
+            return availableWidth / barCount;
+        }
+        else {
+            CGFloat totalPadding = (barCount - 1) * self.barPadding;
+            CGFloat availableWidth = self.bounds.size.width - totalPadding;
+            return availableWidth / barCount;
+        }
     }
     return 0;
 }
@@ -475,7 +515,7 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
     {
         return fmaxf(self.cachedMaxHeight, [super maximumValue]);
     }
-    return self.cachedMaxHeight;    
+    return self.cachedMaxHeight;
 }
 
 #pragma mark - Touch Helpers
