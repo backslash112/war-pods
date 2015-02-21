@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-WorkAndRest-JBChartView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-WorkAndRest-Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D235529B7F1ABEA00B12DA8</key>
+		<key>16E883BB4BB1F9416892B866</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D8EC4A0EBEE9DFCCBDDFC05</key>
+		<key>2277C2307E0D8F02439CE75D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>92CD5D05E27776563B47F917</key>
+		<key>52B2A1B4F78AF15392A68206</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D1D92028218B1E86C7350469</key>
+		<key>6C89F1C80ADCBE7F0FFBB5A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBCC50B2061203E857D09489</key>
 		<dict>
 			<key>primary</key>
 			<true/>
