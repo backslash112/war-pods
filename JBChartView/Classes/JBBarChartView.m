@@ -238,11 +238,8 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
             {
                 [self addSubview:barView];
             }
-            //            NSUInteger barCount = [[self.chartDataDictionary allKeys] count];
             
             CGFloat padding = index % self.itemsCountInOneGroup == 0 ? self.barPadding : self.itemsGroupPadding;
-            NSLog(@"%lu - %f", (unsigned long)index, padding);
-            //            CGFloat padding = self.barPadding;
             xOffset += ([self barWidth] + padding);
             index++;
         }
