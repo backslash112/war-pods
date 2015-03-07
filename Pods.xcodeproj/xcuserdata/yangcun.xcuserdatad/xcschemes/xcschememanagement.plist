@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-WorkAndRest-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-WorkAndRest-Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>16E883BB4BB1F9416892B866</key>
+		<key>0B19377D93D9293A9F76B5EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2277C2307E0D8F02439CE75D</key>
+		<key>18DC74B6359CFB69FF91409C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>52B2A1B4F78AF15392A68206</key>
+		<key>2474C585B085BFA66A2AAE8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C89F1C80ADCBE7F0FFBB5A7</key>
+		<key>532E520A4A6A05E08E531B5D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FBCC50B2061203E857D09489</key>
+		<key>73733D575EF742718E094464</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3FC29A65C576B7C32968353</key>
 		<dict>
 			<key>primary</key>
 			<true/>
