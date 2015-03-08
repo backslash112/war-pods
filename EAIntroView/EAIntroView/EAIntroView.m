@@ -844,10 +844,12 @@ CGFloat easeOutValue(CGFloat value) {
 }
 
 - (void)hideWithFadeOutDuration:(CGFloat)duration {
+    [self finishIntroductionAndRemoveSelf];
+    
     [UIView animateWithDuration:duration animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished){
-		[self finishIntroductionAndRemoveSelf];
+		
 	}];
 }
 
