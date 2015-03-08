@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-WorkAndRest-EAIntroView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-WorkAndRest-EARestrictedScrollView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-WorkAndRest-FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B19377D93D9293A9F76B5EC</key>
+		<key>1D07F4DAC70E11902B8F028A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>18DC74B6359CFB69FF91409C</key>
+		<key>2118DA51D0FAFF5DDF988F71</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2474C585B085BFA66A2AAE8E</key>
+		<key>28347AAED8F4F178F0B457E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>532E520A4A6A05E08E531B5D</key>
+		<key>3E42920CF7386E7EF664A89B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73733D575EF742718E094464</key>
+		<key>A422A14ACF8FA51C5533509D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B3FC29A65C576B7C32968353</key>
+		<key>B8C872DA1BBD8D36D49023BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C613AA9D5F7C83FF116868A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CA7D4D99B07479FB3501454B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

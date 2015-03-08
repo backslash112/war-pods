@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B3FC29A65C576B7C32968353"
+               BlueprintIdentifier = "1D07F4DAC70E11902B8F028A"
                BuildableName = "libPods-WorkAndRest.a"
                BlueprintName = "Pods-WorkAndRest"
                ReferencedContainer = "container:Pods.xcodeproj">
