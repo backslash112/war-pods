@@ -8,3 +8,7 @@
 
 # IMPORTANT
 - The JBChartView tooklit has been customized, so replace the classes in the JBChartView folder with the old classes. The old classes is that what you just downloaded it.
+- The  SWTableViewCell tooklit has been customized, so you need to change 90 to 60 of the button’s default width: (SWTableViewView.h)
+```sh
+#define kUtilityButtonWidthDefault 90 -> #define kUtilityButtonWidthDefault 60
+```
